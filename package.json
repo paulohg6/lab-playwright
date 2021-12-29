@@ -1,0 +1,19 @@
+{
+  "name": "lab-playwright",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test1":"playwright test --project=chrome --headed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "playwright": "^1.17.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.17.1"
+  }
+}
