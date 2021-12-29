@@ -35,6 +35,7 @@ jobs:
     - uses: ./
     - name: Install dependencies
       run: cd sample && npm install playwright@${{ matrix.playwright }}
+      # Teste
       # Headless running is the same across OSes
     - name: Run Playwright (headless)
       if: ${{ matrix.headless == true }}
