@@ -1,30 +1,53 @@
-# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
-name: Node.js CI
-
+name: "tests"
 on:
-  push:
-    branches: [ master ]
   pull_request:
-    branches: [ master ]
+  push:
+    branches:
+      - main
+      - 'releases/*'
+  workflow_dispatch:
+  schedule:
+    - cron: '40 0 * * *'
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
+  test-linux:
+    name: Playwright@${{ matrix.playwright}} ${{ matrix.os }} headless=${{ matrix.headless }}
     strategy:
+      fail-fast: false
       matrix:
-        node-version: [12.x, 14.x, 16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        os: [ubuntu-18.04, ubuntu-20.04, macos-10.15, windows-2019]
+        playwright: [1.0.0, 1.1.0, 1.2.0, 1.12.0, next]
+        headless: [true, false]
+        exclude:
+          - os: ubuntu-20.04
+            playwright: 1.0.0
+          - os: ubuntu-20.04
+            playwright: 1.1.0
+          - os: ubuntu-20.04
+            playwright: 1.2.0
+          - os: ubuntu-20.04
+            playwright: latest
 
+    runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm install
-    - run: npx playwright test --project=chrome
+    - uses: actions/setup-node@v1
+    - uses: ./
+    - name: Install dependencies
+      run: cd sample && npm install playwright@${{ matrix.playwright }}
+      # Headless running is the same across OSes
+    - name: Run Playwright (headless)
+      if: ${{ matrix.headless == true }}
+      run: cd sample && node index.js
+
+      # Headful is different in every OS
+    - name: Run Playwright (headful linux)
+      if: ${{ matrix.headless == false && startsWith(matrix.os, 'ubuntu') }}
+      run: cd sample && HEADFUL=true xvfb-run --auto-servernum -- node index.js
+    - name: Run Playwright (headful windows)
+      if: ${{ matrix.headless == false && startsWith(matrix.os, 'windows') }}
+      run: cd sample && HEADFUL=true node index.js
+      shell: bash
+    - name: Run Playwright (headful mac)
+      if: ${{ matrix.headless == false && startsWith(matrix.os, 'mac') }}
+      run: cd sample && HEADFUL=true node index.js
