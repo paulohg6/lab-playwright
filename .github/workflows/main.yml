@@ -22,7 +22,7 @@ env:
 
 jobs:
   test_linux:
-    name: ${{ matrix.os }} (${{ matrix.browser }})
+    name: ${{ matrix.os }} (${{ matrix.browser }} (${{ matrix.project }})
     strategy:
       fail-fast: false
       matrix:
