@@ -16,7 +16,7 @@
 
 - Vendo o Report e videos gravados da execução
   ```Tem que se executado pos o teste.
-  npx playwright show-report ```
+  npx playwright show-report```
 
 ## Como retirar a execução modo Headles?
 
