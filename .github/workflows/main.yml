@@ -52,7 +52,7 @@ jobs:
         path: test-results
 
   test_mac:
-    name: ${{ matrix.os }} (${{ matrix.browser }})
+    name: ${{ matrix.os }} (${{ matrix.browser }} (${{ matrix.project }}))
     strategy:
       fail-fast: false
       matrix:
@@ -82,7 +82,7 @@ jobs:
         path: test-results
 
   test_win:
-    name: "Windows"
+    name: ${{ matrix.os }} (${{ matrix.browser }} (${{ matrix.project }}))
     strategy:
       fail-fast: false
       matrix:
