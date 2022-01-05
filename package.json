@@ -8,7 +8,7 @@
     "test1":"playwright test --project=chrome --headed"
   },
   "keywords": [],
-  "author": "",
+  "author": "Paulo Henrique Gonçalves",
   "license": "ISC",
   "dependencies": {
     "playwright": "^1.17.1"

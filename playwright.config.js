@@ -7,26 +7,22 @@ const config = {
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   
-  reporter: [ ['html', { outputFolder: 'my-report' }] ],
+  reporter: [ ['html', { outputFolder: 'playwright-report' }] ],
   
   use: {
     headless: false,
     viewport: { width: 1280, height: 600 },
-
     video:"on",
     trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
+    screenshot: 'on',
 
   },
 
   
   projects: [
     {
-      name: 'chrome',
-    
-      use: { ...devices['Desktop Chrome'], },
-      
-      
+      name: 'chrome',    
+      use: { ...devices['Desktop Chrome'], },     
     },
     {
       name: 'firefox',
