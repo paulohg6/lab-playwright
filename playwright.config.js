@@ -8,11 +8,11 @@ const config = {
   retries: process.env.CI ? 2 : 0,
   
   reporter: [
-    ['html', { outputFolder: 'playwright-report' }],
+    ['html', { outputFolder: 'utils/playwright-report' }],
     ['json', {   outputFile: 'test-results/test-results.json' }] ],
   
   use: {
-    headless: false,
+    headless: true,
     viewport: { width: 1280, height: 600 },
     video:"on",
     trace: 'on-first-retry',
@@ -25,6 +25,14 @@ const config = {
     {
       name: 'chromium',    
       use: { ...devices['Desktop Chrome'], },     
+    },
+    {
+      name: 'iphone11promax',    
+      use: { ...devices['iPhone 11 Pro Max'], },     
+    },
+    {
+      name: 'galaxyS9+',    
+      use: { ...devices['Galaxy S9+'], },     
     },
     {
       name: 'firefox',
