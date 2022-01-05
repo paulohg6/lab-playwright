@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
-    "test1":"playwright test --project=chrome --headed"
+    "test1": "playwright test --project=chrome --headed"
   },
   "keywords": [],
   "author": "Paulo Henrique Gonçalves",

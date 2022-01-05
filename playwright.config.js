@@ -9,7 +9,7 @@ const config = {
   
   reporter: [
     ['html', { outputFolder: 'playwright-report' }],
-    ['json', {  outputFolder: 'test-results', outputFile: 'test-results.json' }] ],
+    ['json', {   outputFile: 'test-results/test-results.json' }] ],
   
   use: {
     headless: false,
