@@ -15,11 +15,13 @@
   ```npm test```
 
 - Vendo o Report e videos gravados da execução
-  ```Tem que se executado pos o teste. npx playwright show-report ```
+    Tem que se executado pos o teste.
+  ```npx playwright show-report ```
 
 ## Como retirar a execução modo Headles?
 
-Dentro de playwright.config.js existe a propriedade  headless: true, Passar ela para false assim você consegue ver a execução na sua maquina
+Dentro de playwright.config.js existe a propriedade  headless: true,
+Passar ela para false assim você consegue ver a execução na sua maquina
 
   
   

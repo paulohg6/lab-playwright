@@ -1,4 +1,4 @@
-name: "tests 2"
+name: "Execução de testes no Mac, Linux e Windows"
 
 on:
   push:
