@@ -26,8 +26,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        browser: [chromium, webkit, firefox]
-        project: [chromium, iphone11promax, galaxys9+]
+        browser: [firefox]
+        project: [firefox]
         os: [ubuntu-18.04]
     runs-on: ${{ matrix.os }}
     steps:
@@ -51,12 +51,43 @@ jobs:
         name: ${{ matrix.browser }}-${{ matrix.os }}-${{ matrix.project }}-test-results
         path: test-results
 
+  test_mac:
+    name: ${{ matrix.os }} (${{ matrix.browser }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-11.0]
+        browser: [webkit]
+        project: [iphone11promax, webkit]        
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 12
+    - run: npm i -g npm@8
+    - run: npm ci
+      env:
+        DEBUG: pw:install
+        PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+    - run: npm run build
+    - run: npx playwright install --with-deps ${{ matrix.browser }} chromium
+    - run: npm run test -- --project=${{ matrix.project }}
+    - run: ./utils/upload_flakiness_dashboard.sh ./test-results/report.json
+      if: always()
+    - uses: actions/upload-artifact@v1
+      if: ${{ always() }}
+      with:
+        name: ${{ matrix.browser }}-${{ matrix.os }}-${{ matrix.project }}-test-results
+        path: test-results
+
   test_win:
     name: "Windows"
     strategy:
       fail-fast: false
       matrix:
-        browser: [chromium, firefox, webkit]
+        browser: [chromium]
+        project: [chromium, galaxys9+]
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
@@ -78,5 +109,5 @@ jobs:
     - uses: actions/upload-artifact@v1
       if: ${{ always() }}
       with:
-        name: ${{ matrix.browser }}-win-test-results
+        name: ${{ matrix.browser }}-${{ matrix.os }}-${{ matrix.project }}-test-results
         path: test-results
