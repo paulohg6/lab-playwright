@@ -27,11 +27,11 @@ const config = {
       use: { ...devices['Desktop Chrome'], },     
     },
     {
-      name: 'iphone11promax',    
+      name: 'webkit',    
       use: { ...devices['iPhone 11 Pro Max'], },     
     },
     {
-      name: 'galaxyS9+',    
+      name: 'webkit',    
       use: { ...devices['Galaxy S9+'], },     
     },
     {
