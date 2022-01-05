@@ -15,6 +15,6 @@ test('Login informando Usuario invalido', async ({ page }) => {
   await page.fill('[name="code"]', '1');
   await page.fill('[name="cpf"]', '04419036141');
   await page.click('button:has-text("Entrar")');
-  await expect((await page.innerText('text=Ops! Credenciais inválidas'))).toEqual('Ops! Credenciais inválidas4040');
+  await expect((await page.innerText('text=Ops! Credenciais inválidas'))).toEqual('Ops! Credenciais inválidas');
   
 });
