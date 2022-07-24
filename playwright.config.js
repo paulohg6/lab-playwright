@@ -5,26 +5,30 @@ const { devices } = require('@playwright/test');
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 const config = {
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  
+  retries: 1,
+  timeout: 90000,
   reporter: [
-    ['html', { outputFolder: 'utils/playwright-report' }],
-    ['json', {   outputFile: 'test-results/test-results.json' }] ],
-  
+    ['json', { outputFile: 'test-results/test-results.json' }],
+    ['list'],
+    ['html', { open: 'always', outputFile: 'test-results/test-results.json' } ]
+  ],
+
   use: {
+
+    baseURL: process.env.URL,
     headless: true,
     viewport: { width: 1280, height: 600 },
-    video:"on",
-    trace: 'on-first-retry',
-    screenshot: 'on',
-
+    video: "on",
+    trace: 'on',
+    screenshot: 'on', 
+    
   },
 
-  
+
   projects: [
     {
-      name: 'chromium',    
-      use: { ...devices['Desktop Chrome'], },     
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'], },
     },
     {
       name: 'iphone11promax',    

@@ -1,20 +1,33 @@
-const { test, expect } = require('@playwright/test');
+const { test, expect } = require("@playwright/test");
+const { LoginPage } = require("../pages/login");
+const { InventoryPage } = require("../pages/inventory");
+const { CartPage } = require("../pages/cart");
+const { CheckoutStepOne } = require("../pages/checkoutStepOne");
+const { CheckoutStepTwo } = require("../pages/checkoutStepTwo");
+const Data = require("../data/env.json");
 
-test('Login informando CPF INVALIDO', async ({ page }) => {
-  await page.goto('https://pdv.dito.com.br/login');
-  await page.fill('[name="code"]', 'paulo_smr1@hotmail.com');
-  await page.fill('[name="cpf"]', '32106254');
-  await page.keyboard.press("Tab");
-  
-  await expect((await page.innerText('text=CPF incorreto'))).toEqual('CPF incorreto');
+test.describe.parallel("Login Page Suite", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto(Data.baseURL);
+  });
+  test("test login  @smoke", async ({ page }) => {
+    console.log();
 
-});
+    const loginPage = new LoginPage(page);
+    await loginPage.genericLogin("standard_user", "secret_sauce");
+    await expect(page.locator(".title")).toHaveText("Products");
+  });
+  test("test login problem user  @fail", async ({ page }) => {
+    //Login
+    const loginPage = new LoginPage(page);
+    await loginPage.genericLogin("problem_user", "secret_sauce");
+    await expect(page.locator(".title")).toHaveText("Products");
+  });
 
-test('Login informando Usuario invalido', async ({ page }) => {
-  await page.goto('https://pdv.dito.com.br/login');
-  await page.fill('[name="code"]', '1');
-  await page.fill('[name="cpf"]', '04419036141');
-  await page.click('button:has-text("Entrar")');
-  await expect((await page.innerText('text=Ops! Credenciais inválidas'))).toEqual('Ops! Credenciais inválidas');
-  
+  test("test login problem user 1  @fail", async ({ page }) => {
+    //Login
+    const loginPage = new LoginPage(page);
+    await loginPage.genericLogin("locked_out_user", "secret_sauce");
+    await expect(page.locator(".title")).toHaveText("Products");
+  });
 });

@@ -4,16 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test",
-    "test1": "playwright test --project=chrome --headed"
+    "test": "playwright test --project=chromium",
+    "chrome": "playwright test --project=chromium --headed",
+    "smoke": "playwright test --grep @smoke",
+    "debug": "playwright test --debug "
   },
   "keywords": [],
   "author": "Paulo Henrique Gonçalves",
   "license": "ISC",
   "dependencies": {
-    "playwright": "^1.17.1"
+    "v8-to-istanbul": "^9.0.1"
   },
   "devDependencies": {
-    "@playwright/test": "^1.17.1"
+    "@playwright/test": "^1.23.1",
+    "playwright": "^1.23.1"
   }
 }

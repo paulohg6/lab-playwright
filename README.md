@@ -1,5 +1,9 @@
 # lab-playwright
 
+Projeto utilizando playwright para criação de testes ponta a ponta(e2e).
+
+
+
 ## Rodando Projeto:
 
 - Clone o Projeto
@@ -18,6 +22,8 @@
     Tem que se executado pos o teste.
   ```npx playwright show-report ```
 
+## Debungando projeto
+
 ## Como retirar a execução modo Headles?
 
 Dentro de playwright.config.js existe a propriedade  headless: true,
@@ -25,3 +31,9 @@ Passar ela para false assim você consegue ver a execução na sua maquina
 
   
   
+# Estrutura do projeto
+
+O projeto é estruturado em 4 partes:
+pages
+Tests
+Utils
