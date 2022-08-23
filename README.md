@@ -2,8 +2,6 @@
 
 Projeto utilizando playwright para criação de testes ponta a ponta(e2e).
 
-
-
 ## Rodando Projeto:
 
 - Clone o Projeto
@@ -22,18 +20,14 @@ Projeto utilizando playwright para criação de testes ponta a ponta(e2e).
     Tem que se executado pos o teste.
   ```npx playwright show-report ```
 
-## Debungando projeto
+## Debugando projeto
+ ```npm run debug```
 
 ## Como retirar a execução modo Headles?
 
 Dentro de playwright.config.js existe a propriedade  headless: true,
 Passar ela para false assim você consegue ver a execução na sua maquina
-
-  
   
 # Estrutura do projeto
 
-O projeto é estruturado em 4 partes:
-pages
-Tests
-Utils
+Foi utilizado o page objects de acordo com a documentação oficial do playwright para JS https://playwright.dev/docs/test-pom
