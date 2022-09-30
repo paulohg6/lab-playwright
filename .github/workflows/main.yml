@@ -22,6 +22,7 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test --reporter=junit
       - name: Send Slack Message
+        if: always()
         run: npx run report-slack
       - uses: actions/upload-artifact@v2
         if: always()
