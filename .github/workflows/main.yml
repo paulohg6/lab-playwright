@@ -17,8 +17,9 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - name: Run Playwright tests
+      - name: Define Variable
         run: PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml
+      - name: Run Playwright tests
         run: npx playwright test --reporter=junit
       - name: Send Slack Message
         run: npx run report-slack
