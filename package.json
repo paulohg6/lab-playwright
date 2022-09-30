@@ -7,12 +7,14 @@
     "test": "playwright test --project=chromium",
     "chrome": "playwright test --project=chromium --headed",
     "smoke": "playwright test --grep @smoke",
-    "debug": "playwright test --debug "
+    "debug": "playwright test --debug ",
+    "report-slack": "test-results-reporter publish -c report.json"
   },
   "keywords": [],
   "author": "Paulo Henrique Gonçalves",
   "license": "ISC",
   "dependencies": {
+    "test-results-reporter": "^1.0.10",
     "v8-to-istanbul": "^9.0.1"
   },
   "devDependencies": {

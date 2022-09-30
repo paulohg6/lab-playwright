@@ -19,7 +19,7 @@ env:
   # Force terminal colors. @see https://www.npmjs.com/package/colors
   FORCE_COLOR: 1
   FLAKINESS_CONNECTION_STRING: ${{ secrets.FLAKINESS_CONNECTION_STRING }}
-
+  PLAYWRIGHT_JUNIT_OUTPUT_NAME: "results.xml"
 jobs:
   test_linux:
     name: ${{ matrix.os }} (${{ matrix.browser }} (${{ matrix.project }}))
@@ -43,7 +43,7 @@ jobs:
     
     - run: npx playwright install --with-deps ${{ matrix.browser }} chromium
     - run: xvfb-run --auto-servernum --server-args="-screen 0 1280x960x24" -- npm run test -- --project=${{ matrix.project }}
-    - run: ./utils/upload_flakiness_dashboard.sh ./test-results/report.json
+    - run: npm run report-slack
       if: always()
     - uses: actions/upload-artifact@v1
       if: always()
@@ -72,7 +72,7 @@ jobs:
         PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
     - run: npx playwright install --with-deps ${{ matrix.browser }} chromium
     - run: npm run test -- --project=${{ matrix.project }}
-    - run: ./utils/upload_flakiness_dashboard.sh ./test-results/report.json
+    - run: npm run report-slack
       if: always()
     - uses: actions/upload-artifact@v1
       if: ${{ always() }}
@@ -103,7 +103,7 @@ jobs:
     - run: npx playwright install --with-deps ${{ matrix.browser }} chromium
     - run: npm run test -- --project=${{ matrix.browser }}
       shell: bash
-    - run: ./utils/upload_flakiness_dashboard.sh ./test-results/report.json
+    - run: npm run report-slack
       if: always()
       shell: bash
     - uses: actions/upload-artifact@v1

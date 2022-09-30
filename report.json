@@ -1,0 +1,20 @@
+{
+    "reports": [
+      {
+        "targets": [
+          {
+            "name": "slack",
+            "inputs": {
+              "url": "https://hooks.slack.com/services/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"
+            }
+          }
+        ],
+        "results": [
+          {
+            "type": "junit",
+            "files": ["./results.xml"]
+          }
+        ]
+      }
+    ]
+  }
