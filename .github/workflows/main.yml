@@ -43,7 +43,8 @@ jobs:
         PLAYWRIGHT_JUNIT_OUTPUT_NAME: results.xml
     
     - run: npx playwright install --with-deps ${{ matrix.browser }} chromium
-    - run: xvfb-run --auto-servernum --server-args="-screen 0 1280x960x24" -- npm run test -- --project=${{ matrix.project }}
+    - run: set PLAYWRIGHT_JUNIT_OUTPUT_NAME=results.xml
+    - run: xvfb-run --auto-servernum --server-args="-screen 0 1280x960x24" -- npm run test -- --project=${{ matrix.project }} --reporter=junit
     - run: npm run report-slack
       if: always()
     - uses: actions/upload-artifact@v1

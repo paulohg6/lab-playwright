@@ -11,7 +11,7 @@ const config = {
     ['json', { outputFile: 'test-results/test-results.json' }],
     ['list'],
     ['html', { open: 'always', outputFile: 'test-results/test-results.json' } ],
-    ['junit', { outputFile: './test1/results.xml' }] ,
+    ['junit', { outputFile: 'results.xml' }] ,
   ],
 
   use: {
